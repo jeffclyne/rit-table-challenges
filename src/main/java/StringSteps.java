@@ -21,7 +21,7 @@ public class StringSteps {
     public static int stringSteps(String str1, String str2) {
         return 0;
     }
-    public void main(String args) {
+    public static void main(String[] args) {
         System.out.println(stringSteps("string", "steps")); //4
         System.out.println(stringSteps("intuit", "inuit")); //1
         System.out.println(stringSteps("puzzle", "problem")); //4
