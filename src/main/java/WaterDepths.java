@@ -49,6 +49,41 @@ public class WaterDepth {
         }
         return ans;
     }
+    
+    //Another possible solution
+    public static int unitsOfWaterHeld2(int[] elevationMap) {
+        if (elevationMap.length < 3) return 0;
+
+        int ans = 0;
+        int l = 0, r = elevationMap.length - 1;
+        int[] possibleDepths = new int[elevationMap.length];
+        int currentDepth = 0;
+
+        for (l = 0; l < elevationMap.length - 1; l++) {
+            if (elevationMap[l] < currentDepth) {
+                possibleDepths[l] = currentDepth - elevationMap[l];
+            } else if (elevationMap[l] >= currentDepth) {
+                currentDepth = elevationMap[l];
+            }
+        }
+
+        currentDepth = 0;
+        for (r = elevationMap.length-1; r >= 0; r--) {
+            if (elevationMap[r] < currentDepth) {
+                //We want to take the minimum of the right and the left
+                if (currentDepth - elevationMap[r] < possibleDepths[r]) {
+                    possibleDepths[r] = currentDepth - elevationMap[r];
+                }
+            } else if (elevationMap[l] >= currentDepth) {
+                currentDepth = elevationMap[l];
+            }
+        }
+
+        for (int i = 0; i < elevationMap.length; i ++) {
+            ans += possibleDepths[i];
+        }
+        return ans;
+    }
 
     public static void main(String[] args) {
         System.out.println(unitsOfWaterHeld(new int[] { 3, 1, 0, 2, 1, 3, 0, 3 }));
